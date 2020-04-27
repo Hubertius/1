@@ -2,19 +2,18 @@
 #include <stdlib.h>
 
 
-int read_int(void *a, void *b);
-void* add_int(const void *left, const void *right);
-void* sub_int(const void *left, const void *right);
-void* divide_int(const void *left, const void *right);
-void* mul_int(const void *left, const void *right);
-void show_int(const void *a);
 
-float read_float(void *a, void *b);
-void* add_float(const void *left, const void *right);
-void* sub_float(const void *left, const void *right);
-void* divide_float(const void *left, const void *right);
-void* mul_float(const void *left, const void *right);
-void show_float(const void *a);
+
+
+
+
+
+float read_complex(void *a, void *b);
+void* add_complex(const void *left, const void *right);
+void* sub_complex(const void *left, const void *right);
+void* divide_complex(const void *left, const void *right);
+void* mul_complex(const void *left, const void *right);
+void show_complex(const void *a);
 
 struct operations_t
 {
@@ -44,7 +43,9 @@ int is_smaller_float(const void *a, const void *b);
 int main()
 {
     struct operations_t operations_int;
+    struct operations_t operations_complex;
     int a=3,b=2;
+    operations_complex.add=add_complex;
     operations_int.add = add_int;
     int *result = (int *)operations_int.add(&a,&b);
     printf("%d",*result);
@@ -230,6 +231,20 @@ int is_smaller_float(const void *a, const void *b)
     }
     return 0;
 
+}
+
+void* add_complex(const void *left, const void *right)
+{
+    if( left == NULL || right == NULL )
+    {
+        return NULL;
+    }
+    int a;
+    struct complex_t * result = (struct complex_t*) malloc(sizeof(struct complex_t));
+    struct complex_t * left_temp= (const struct *)left;
+    struct complex_t * right_temp= (const struct *)right;
+    //
+    return result;
 }
 
 struct complex_t* set(struct complex_t* cp, float re, float im, int *err_code)
